@@ -3,6 +3,7 @@ import express from "express";
 import cookieParser from "cookie-parser";
 import { Database } from "./database/connection";
 import { authRouter } from "./controllers/auth.controller";
+import { tasksRouter } from "./controllers/tasks.controller";
 import { usersRouter } from "./controllers/users.controller";
 
 const app = express();
@@ -12,6 +13,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use("/auth", authRouter);
+app.use("/tasks", tasksRouter);
 app.use("/users", usersRouter);
 
 new Database()
