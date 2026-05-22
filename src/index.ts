@@ -5,7 +5,6 @@ import cookieParser from "cookie-parser";
 import { Database } from "./database/connection";
 import { authRouter } from "./controllers/auth.controller";
 import { tasksRouter } from "./controllers/tasks.controller";
-import { usersRouter } from "./controllers/users.controller";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -22,7 +21,6 @@ app.use(cookieParser());
 
 app.use("/auth", authRouter);
 app.use("/tasks", tasksRouter);
-app.use("/users", usersRouter);
 
 new Database()
   .connect()
