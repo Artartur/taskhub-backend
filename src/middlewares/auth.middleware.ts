@@ -15,7 +15,7 @@ export function authMiddleware(
   if (!token) return res.status(401).json({ message: "Unauthorized" });
 
   try {
-    const payload = jwt.verify(token, process.env.JWT_SECRET as string) as {
+    const payload = jwt.verify(token, String(process.env.JWT_SECRET)) as {
       sub: string;
     };
 

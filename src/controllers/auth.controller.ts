@@ -12,7 +12,7 @@ authRouter.post("/login", async (req: Request, res: Response) => {
 
     res.cookie("token", token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
+      secure: String(process.env.NODE_ENV) === "production",
       sameSite: "strict",
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
@@ -31,7 +31,7 @@ authRouter.post("/login", async (req: Request, res: Response) => {
 authRouter.post("/logout", (_req: Request, res: Response) => {
   res.clearCookie("token", {
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
+    secure: String(process.env.NODE_ENV) === "production",
     sameSite: "strict",
     path: "/",
   });

@@ -8,7 +8,7 @@ export class Database {
   public async connect(): Promise<void> {
     if (this.connected) return;
 
-    await mongoose.connect(process.env.MONGODB_URI as string);
+    await mongoose.connect(String(process.env.MONGODB_URI));
     this.connected = true;
   }
 }
