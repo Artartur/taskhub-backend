@@ -1,6 +1,6 @@
 export interface CreateTaskDTO {
   description: string;
-  done: boolean;
+  done?: boolean;
   title: string;
   userId: string;
 }

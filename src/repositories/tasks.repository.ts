@@ -14,11 +14,17 @@ export class TasksRepository {
     return TaskModel.findById(taskId);
   }
 
-  public async updateTask(taskId: string, data: Partial<CreateTaskDTO>) {
-    return TaskModel.findByIdAndUpdate(taskId, data, { new: true });
+  public async updateTask(
+    taskId: string,
+    userId: string,
+    data: Partial<CreateTaskDTO>,
+  ) {
+    return TaskModel.findOneAndUpdate({ _id: taskId, userId }, data, {
+      new: true,
+    });
   }
 
-  public async deleteTask(taskId: string) {
-    return TaskModel.deleteOne({ _id: taskId });
+  public async deleteTask(taskId: string, userId: string) {
+    return TaskModel.deleteOne({ _id: taskId, userId });
   }
 }

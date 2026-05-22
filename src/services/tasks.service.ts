@@ -12,15 +12,19 @@ export class TasksService {
     return this.tasksRepository.getAllTask(userId);
   }
 
-  public async getTaskById(taskId: unknown) {
-    return this.tasksRepository.getTaskById(taskId as string);
+  public async getTaskById(taskId: string) {
+    return this.tasksRepository.getTaskById(taskId);
   }
 
-  public async updateTask(taskId: unknown, data: Partial<CreateTaskDTO>) {
-    return this.tasksRepository.updateTask(taskId as string, data);
+  public async updateTask(
+    taskId: string,
+    userId: string,
+    data: Partial<CreateTaskDTO>,
+  ) {
+    return this.tasksRepository.updateTask(taskId, userId, data);
   }
 
-  public async deleteTask(taskId: unknown) {
-    return this.tasksRepository.deleteTask(taskId as string);
+  public async deleteTask(taskId: string, userId: string) {
+    return this.tasksRepository.deleteTask(taskId, userId);
   }
 }
