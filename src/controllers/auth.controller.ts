@@ -27,9 +27,6 @@ authRouter.post("/login", async (req: Request, res: Response) => {
 });
 
 authRouter.post("/logout", (_req: Request, res: Response) => {
-<<<<<<< HEAD
-  res.clearCookie("token");
-=======
   res.clearCookie("token", {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
@@ -37,7 +34,6 @@ authRouter.post("/logout", (_req: Request, res: Response) => {
     path: "/",
   });
 
->>>>>>> 1fa8daa (feat(auth): add logout endpoint)
   res.status(200).json({ message: "Logged out successfully" });
 });
 
