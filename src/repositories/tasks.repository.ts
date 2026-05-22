@@ -20,7 +20,7 @@ export class TasksRepository {
     data: Partial<CreateTaskDTO>,
   ) {
     return TaskModel.findOneAndUpdate({ _id: taskId, userId }, data, {
-      new: true,
+      returnDocument: "after",
     });
   }
 
