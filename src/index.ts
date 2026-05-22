@@ -2,12 +2,12 @@ import "dotenv/config";
 import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
-import { Database } from "./database/connection";
 import { authRouter } from "./controllers/auth.controller";
 import { tasksRouter } from "./controllers/tasks.controller";
+import mongoose from "mongoose";
 
 const app = express();
-const PORT = Number(process.env.PORT) || 3000;
+const PORT = process.env.PORT || 3000;
 
 app.use(
   cors({
@@ -22,12 +22,18 @@ app.use(cookieParser());
 app.use("/auth", authRouter);
 app.use("/tasks", tasksRouter);
 
-new Database()
-  .connect()
-  .then(() => {
-    app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-  })
-  .catch((err) => {
-    console.error("MongoDB connection failed:", err.message);
+async function startServer() {
+  try {
+    await mongoose.connect(process.env.MONGODB_URI as string);
+
+    app.listen(PORT, () => {
+      console.log(`Server running on port ${PORT}`);
+    });
+  } catch (error) {
+    console.error(error);
+
     process.exit(1);
-  });
+  }
+}
+
+startServer();
